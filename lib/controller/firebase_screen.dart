@@ -6,7 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 Future<String>singup(String e1,String p1) async{
   try {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-     await firebaseAuth.createUserWithEmailAndPassword(email: e1, password: p1);
+     await firebaseAuth.createUserWithEmailAndPassword(email: e1.trim(), password: p1.trim()).then((value) => print("Success")).catchError((error)=> print("$error"));
      return "Success";
   }
   on FirebaseAuthException catch (e){

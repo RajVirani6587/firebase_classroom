@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/firebase_screen.dart';
-import 'home_controller.dart';
+import '../../controller/home_controller.dart';
 
 
 class LogOut_Screen extends StatefulWidget {
@@ -24,7 +24,6 @@ class _LogOut_ScreenState extends State<LogOut_Screen> {
   void getProfile() async {
     homecontroller.userdataList.value = await userProfile();
   }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

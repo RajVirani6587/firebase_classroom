@@ -14,92 +14,129 @@ class Create_Account extends StatefulWidget {
 class _Create_AccountState extends State<Create_Account> {
   TextEditingController txtemail = TextEditingController();
   TextEditingController txtpassword = TextEditingController();
-
+  var txtkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Create",
-                style: TextStyle(
-                    color: Colors.blue.shade900,
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "account",
-                style: TextStyle(color: Colors.blue, fontSize: 20),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                margin:
-                    EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
-                child: TextFormField(
-                    controller: txtemail,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      label: Text("E-mail"),
-                      suffixIcon: Icon(
-                        Icons.email_outlined,
-                        color: Colors.blue.shade900,
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Enter Email';
-                      } else {
-                        return null;
-                      }
-                    }),
-              ),
-              Container(
-                margin:
-                    EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
-                child: TextFormField(
-                  controller: txtpassword,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text("Password"),
-                    suffixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.blue.shade900,
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () async {
-                  String msg = await singup(txtemail.text, txtpassword.text);
-                  Get.snackbar('${msg}', '');
-                  if (msg == "Success") {
-                    Get.offNamed('out');
-                  }
-                },
-                child: Container(
-                  color: Colors.blue.shade600,
-                  margin: EdgeInsets.all(25),
-                  width: double.infinity,
-                  height: 40,
-                  child: Center(
-                      child: Text(
-                    "Sign up",
-                    style: TextStyle(fontSize: 30, color: Colors.white),
-                  )),
-                ),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-            ],
-          ),
-        ),
-      ),
+    return  Form(
+      key: txtkey,
+      child: SafeArea(
+         child: Scaffold(
+           body: Container(
+             height: double.infinity,
+             width: double.infinity,
+             child: Stack(
+               children: [
+                 Image.asset(
+                   "assets/image/back.jpg",
+                   fit: BoxFit.cover,
+                   height: double.infinity,
+                   width: double.infinity,
+                   scale: 1,
+                 ),
+                 Center(
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Text(
+                         "Create",
+                         style: TextStyle(
+                             color: Colors.white,
+                             fontSize: 50,
+                             fontWeight: FontWeight.bold),
+                       ),
+                       Text(
+                         "account",
+                         style: TextStyle(color: Colors.white54, fontSize: 20),
+                       ),
+                       SizedBox(
+                         height: 15,
+                       ),
+                       Container(
+                         margin:
+                         EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
+                         child: TextFormField(
+                             validator: (value){
+                               if(value!.isEmpty)
+                               {
+                                 return 'Enter Email';
+                               }
+                               else{
+                                 return null;
+                               }
+                             },
+                             style: TextStyle(color: Colors.white),
+                             controller: txtemail,
+                             decoration: InputDecoration(
+                               border: OutlineInputBorder(),
+                               label: Text("E-mail",style: TextStyle(color: Colors.white),),
+                               suffixIcon: Icon(
+                                 Icons.email_outlined,
+                                 color: Colors.white,
+                               ),
+                             ),
+                             ),
+                       ),
+                       Container(
+                         margin:
+                         EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
+                         child: TextFormField(
+                           validator: (value){
+                             if(value!.isEmpty)
+                             {
+                               return 'Enter Password';
+                             }
+                             else{
+                               return null;
+                             }
+                           },
+                           style: TextStyle(color: Colors.white),
+                           controller: txtpassword,
+                           decoration: InputDecoration(
+                             border: OutlineInputBorder(),
+                             label: Text("Password",style: TextStyle(color: Colors.white),),
+                             suffixIcon: Icon(
+                               Icons.lock,
+                               color: Colors.white,
+                             ),
+                           ),
+                         ),
+                       ),
+                       InkWell(
+                         onTap: () async {
+                           String msg = await singup(txtemail.text, txtpassword.text);
+                           Get.snackbar('${msg}', '');
+                           if(txtkey.currentState!.validate() == true) {
+                             if (msg == "Success") {
+                               Get.offNamed('out');
+                             }
+                           }
+                         },
+                         child: Container(
+                           decoration: BoxDecoration(
+                             color: Colors.blue.shade600,
+                             borderRadius: BorderRadius.circular(20),
+                           ),
+                           margin: EdgeInsets.all(25),
+                           width: double.infinity,
+                           height: 40,
+                           child: Center(
+                               child: Text(
+                                 "Sign up",
+                                 style: TextStyle(fontSize: 30, color: Colors.white),
+                               )),
+                         ),
+                       ),
+                       SizedBox(
+                         height: 25,
+                       ),
+                     ],
+                   ),
+                 ),
+               ],
+             ),
+           ),
+         ),
+       ),
     );
   }
 }
