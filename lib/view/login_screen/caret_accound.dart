@@ -103,8 +103,9 @@ class _Create_AccountState extends State<Create_Account> {
                        ),
                        InkWell(
                          onTap: () async {
+                           print("done");
                            String msg = await singup(txtemail.text, txtpassword.text);
-                           Get.snackbar('${msg}', '');
+                           Get.snackbar('${msg}','');
                            if(txtkey.currentState!.validate() == true) {
                              if (msg == "Success") {
                                Get.offNamed('out');

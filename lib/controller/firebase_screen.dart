@@ -26,7 +26,7 @@ Future<String>singup(String e1,String p1) async{
 Future<String> loginEmailPassword(String email,String password) async{
    try {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-    await firebaseAuth.signInWithEmailAndPassword(email: email.trim(), password: password.trim()).then((value) => print("Success")).catchError((error)=> print("$error"));
+    await firebaseAuth.signInWithEmailAndPassword(email:email.trim(),password:password.trim()).then((value) => print("Success")).catchError((error)=> print("$error"));
     return "Success";
       }
   on FirebaseAuthException catch (e){

@@ -19,8 +19,7 @@ class _Login_ScreenState extends State<Login_Screen> {
        key: txtkey,
        child: SafeArea(
          child: Scaffold(
-             body: Container(
-               height: double.infinity,
+             body: Container( height: double.infinity,
                width: double.infinity,
                child: Stack(
                  children: [
@@ -83,14 +82,15 @@ class _Login_ScreenState extends State<Login_Screen> {
                              ),
                            ),
                          ),
-                         InkWell(onTap: ()async{
+                         InkWell(onTap: () async{
                            String msg = await loginEmailPassword(txtemail.text,txtpassword.text);
-                           //if(txtkey.currentState!.validate() == true)
+                           Get.snackbar('$msg', '');
+                           if(txtkey.currentState!.validate() == true) {
                              if (msg == "Success") {
                                Get.snackbar('$msg', '');
                                Get.offNamed('out');
                              }
-
+                           }
                          },
                            child: Container(
                              decoration: BoxDecoration(
@@ -129,7 +129,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                  ],
                ),
              ),
-           ),
+          ),
        ),
      );
   }
